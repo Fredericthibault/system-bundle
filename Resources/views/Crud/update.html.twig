@@ -1,0 +1,15 @@
+{% extends 'ViwebSystemBundle:_layout/admin:layout.html.twig' %}
+
+{% import 'ViwebSystemBundle:Macro:headers.html.twig' as headers %}
+{% import 'ViwebSystemBundle:Macro:buttons.html.twig' as buttons %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
+
+{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+
+{% form_theme form 'ViwebSystemBundle:Form:theme.html.twig' %}
+
+{% block content %}
+{% include '@ViwebSystem/Crud/Create/_header.html.twig' %}
+{% include '@ViwebSystem/Crud/Update/_content.html.twig' %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'ViwebSystemBundle:_layout/admin:sidebar.html.twig' %}
+
+{% block title %}Sylius | {% endblock %}
+
+{% block stylesheets %}
+    {% include 'ViwebSystemBundle:Helper:_stylesheets.html.twig' %}
+{% endblock %}
+
+{#{% block topbar %}#}
+    {#<a class="icon item" id="sidebar-toggle">#}
+        {#<i class="sidebar icon"></i>#}
+    {#</a>#}
+    {#{% include '@ViwebSystem/_layout/admin/_search.html.twig' %}#}
+    {#{% include '@ViwebSystem/_layout/admin/_security.html.twig' %}#}
+{#{% endblock %}#}
+
+{% block footer %}
+    <!--Footer-part-->
+    <div class="row-fluid">
+        <div id="footer" class="span12"> 2016 &copy; Viweb</div>
+    </div>
+    <!--end-Footer-part-->
+{% endblock %}
+
+{% block javascripts %}
+    {% include 'ViwebSystemBundle:Helper:_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
+{% endblock %}

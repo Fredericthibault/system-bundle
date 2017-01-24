@@ -1,0 +1,29 @@
+Viweb\SystemBundle\Entity\Block:
+    type: entity
+    table: null
+    repositoryClass: Viweb\SystemBundle\Repository\BlockRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+    manyToOne:
+        type:
+            targetEntity: Viweb\SystemBundle\Entity\BlockType
+            inversedBy: blocks
+            joinColumn:
+                name: type_id
+                referencedColumnName: id
+        section:
+            targetEntity: Viweb\SystemBundle\Entity\Section
+            inversedBy: blocks
+            joinColumn:
+                name: section_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

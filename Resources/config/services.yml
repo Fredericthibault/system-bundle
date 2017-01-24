@@ -1,0 +1,15 @@
+services:
+    viweb_system.twig_extension:
+        class: Viweb\SystemBundle\Twig\SortByExtension
+        public: true
+        tags:
+          - { name: twig.extension }
+    viweb_system.admin_menu:
+        class: Viweb\SystemBundle\Menu\Menubuilder
+        arguments: ["@knp_menu.factory", "@service_container", "@doctrine.orm.entity_manager"]
+        tags:
+          - { name: knp_menu.menu_builder, method: createAdminMenu, alias: admin}
+    viweb_system.admin_menu_listener:
+        class: Viweb\SystemBundle\EventListener\ConfigureAdminMenuListener
+        tags:
+          - { name: kernel.event_listener, event: viweb_system.menu_admin_configure, method: onMenuConfigure }

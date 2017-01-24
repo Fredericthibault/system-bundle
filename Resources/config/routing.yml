@@ -1,0 +1,6 @@
+#
+viweb_system_catchall:
+    path:     /{req}
+    defaults: { _controller: ViwebSystemBundle:Default:index }
+    requirements:
+        req: ".*"

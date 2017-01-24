@@ -1,0 +1,23 @@
+Viweb\SystemBundle\Entity\BlockType:
+    type: entity
+    table: null
+    repositoryClass: Viweb\SystemBundle\Repository\BlockTypeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        form:
+            type: string
+            length: 255
+            nullable: true
+    oneToMany:
+        block:
+            targetEntity: Viweb\SystemBundle\Entity\Block
+            mappedBy: type
+    lifecycleCallbacks: {  }

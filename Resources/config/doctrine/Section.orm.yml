@@ -1,0 +1,26 @@
+Viweb\SystemBundle\Entity\Section:
+    type: entity
+    table: null
+    repositoryClass: Viweb\SystemBundle\Repository\SectionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+    oneToMany:
+        children:
+            targetEntity: Viweb\SystemBundle\Entity\Section
+            mappedBy: parent
+        blocks:
+            targetEntity: Viweb\SystemBundle\Entity\Block
+            mappedBy: section
+    manyToOne:
+        parent:
+            targetEntity: Viweb\SystemBundle\Entity\Section
+            inversedBy: children
+    lifecycleCallbacks: {  }

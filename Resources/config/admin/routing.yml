@@ -1,0 +1,25 @@
+viweb_section:
+    resource: |
+        alias: viweb.section
+        redirect: update
+        except: ['show', 'update']
+        section: admin
+        templates: ViwebSystemBundle:Crud
+        grid: viweb_section
+        vars:
+            all:
+                subheader: app.ui.supplier
+            index:
+                icon: 'outline'
+    type: sylius.resource
+
+viweb_admin_section_update:
+    path: /sections/{id}/edit
+    methods: [GET, POST]
+    defaults:
+        _controller: viweb.controller.section:updateAction
+        _sylius:
+            section: admin
+            template: ViwebSystemBundle:Crud:update.html.twig
+
+

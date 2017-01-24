@@ -1,0 +1,27 @@
+{{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate', 'method': 'put' }}) }}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Main Informations</h5>
+            </div>
+            <div class="widget-content">
+
+                {% if configuration.vars.templates.form is defined %}
+                    {% include configuration.vars.templates.form %}
+                {% else %}
+                    {{ form_widget(form) }}
+                {% endif %}
+
+                {% include '@ViwebSystem/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))}} %}
+                {{ form_row(form._token) }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form, {'render_rest': false}) }}
+<style>
+    .widget-box {
+        margin: 10px;
+    }
+</style>

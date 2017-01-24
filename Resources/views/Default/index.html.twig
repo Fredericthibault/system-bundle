@@ -1,0 +1,10 @@
+<html>
+<head>
+    <title>{{ section.title }}</title>
+</head>
+<body>
+    {% for b in section.blocks %}
+        {{ b.body|raw }}
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,257 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block start_form_section %}
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span6">
+        <div class="widget-box">
+{% endblock start_form_section %}
+{% block end_form_section %}
+{% endblock end_form_section %}
+{% block form_row -%}
+    <div class="control-group {% if required %}required {% endif %}">
+        {{- form_label(form) -}}
+        <div class="controls{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+            {{- form_widget(form) -}}
+        </div>
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock form_row %}
+
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    {% if 'class' in attr|keys%}
+        {% if 'span' not in attr['class'] %}
+            {% set attr = attr|merge({ 'class':'span11 ' ~ attr.class }) %}
+        {% endif %}
+    {% else %}
+        {% set attr = attr|merge({ 'class': 'span11' }) %}
+    {% endif %}
+
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{% endblock form_widget_simple %}
+
+{%- block form_errors -%} {# TODO make the error widget #}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="ui red {% if form.parent is not empty %}pointing {% endif %}label sylius-validation-error"{% if form.parent is empty %} style="margin-bottom: 10px;"{% endif %}>
+                {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{% block checkbox_row -%}
+    <div class="control-group {% if required %}required {% endif %}">
+        {{- form_label(form) -}}
+        <div class="controls{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+            {{- form_widget(form) -}}
+        </div>
+            {{- form_errors(form) -}}
+    </div>
+{%- endblock checkbox_row %}
+
+{% block radio_row -%}
+    <div class="control-group {% if required %}required {% endif %}">
+            {{- form_label(form) -}}
+            <div class="controls{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+                {{- form_widget(form) -}}
+            </div>
+            {{- form_errors(form) -}}
+    </div>
+{%- endblock radio_row %}
+
+{% block money_widget -%}
+    <div class="input-append">
+        {{- form_widget(form) -}}
+        <span class="add-on">$</span>
+    </div>
+{%- endblock money_widget %}
+
+{% block choice_row -%}
+    <div class="control-group {% if required %}required {% endif %}">
+    {{- form_label(form) -}}
+    <div class="controls{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_widget(form) -}}
+    </div>
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock choice_row %}
+
+{%- block choice_widget_expanded -%}
+    <div class="control-group {% if required %}required {% endif %}">
+    {{- form_label(form) -}}
+    <div class="controls{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_widget(form, {'multiple': true}) -}}
+    </div>
+    {{- form_errors(form) -}}
+</div>
+{%- endblock choice_widget_expanded -%}
+
+{% block percent_widget -%}
+    <div class="input-append">
+        {{- form_widget(form) -}}
+        <span class="add-on">%</span>
+    </div>
+{%- endblock percent_widget %}
+
+
+{% block sylius_province_widget %}
+<div class="ui compact segment">
+    <div class="inline fields">
+        {{ form_row(form.code) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.abbreviation) }}
+    </div>
+</div>
+{% endblock %}
+
+{% block sylius_zone_member_widget %}
+    <div class="ui compact segment">
+        <div class="inline fields">
+            {{ form_row(form.code) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_rule_widget %}
+    <div class="ui segment">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_action_widget %}
+    <div class="ui segment">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_configuration_widget %}
+    <div class="configuration">
+        {% for child in form %}
+            <hr/>{{ form_row(child) }}<hr/>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block sylius_product_option_value_widget %}
+    <div class="ui segment">
+        {{ form_row(form.code) }}
+            <div class="five fields">
+            {% for locale, translationForm in form.translations %}
+                {{ form_row(translationForm.value, {'label': locale}) }}
+                {% if 0 == loop.index % 5 %}
+                </div>
+                <div class="five fields">
+                {% endif %}
+            {% endfor %}
+            </div>
+    </div>
+{% endblock %}
+
+{% block sylius_translations_row -%}
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+    {% for translation in form %}
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Translation ({{ translation.vars.name }})</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        {{ form_widget(translation) }}
+                        {{- form_errors(form) -}}
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+{%- endblock sylius_translations_row %}
+
+{% block sylius_resource_autocomplete_choice_row %}
+    {{- form_label(form) -}}
+    <div
+            class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
+            data-url="{{ remote_url }}"
+            data-choice-name="{{ choice_name }}"
+            data-choice-value="{{ choice_value }}"
+            data-criteria-type="{{ remote_criteria_type }}"
+            data-criteria-name="{{ remote_criteria_name }}"
+    >
+        {{ form_row(form, {'attr': {'class' : 'autocomplete'}}) }}
+        <i class="dropdown icon"></i>
+        <div class="default text">{% if placeholder is defined %} {{ placeholder|trans }} {% endif %}</div>
+        <div class="menu"></div>
+    </div>
+{% endblock %}
+
+{%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {% set label_attr = label_attr|merge({'class': label_attr.class|default('control-label')}) %}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif -%}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('control-label') ~ ' required')|trim}) %}
+        {%- endif -%}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ translation_domain is same as(false) ? label : label|trans({}, translation_domain) }}</label>
+    {%- endif -%}
+{%- endblock form_label -%}
+
+{% block burgov_key_value_widget %}
+    {% for child in form %}
+        {{ form_widget(child) }}
+
+    {% endfor %}
+{% endblock %}
+
+{% block burgov_key_value_row_widget %}
+        {% for child in form %}
+            {{ form_widget(child) }}
+        {% endfor %}
+{% endblock %}
+
+{% block viweb_block_widget %}
+    {% for block in form %}
+        {{ form_widget(block) }}
+        {{- form_errors(form) -}}
+    {% endfor %}
+{% endblock %}
+
+{% block viweb_block_translation_widget %}
+
+{% for block in form %}
+    {{ form_widget(block) }}
+    {{- form_errors(form) -}}
+{% endfor %}
+{% endblock %}
+
+{%  block collection_widget %}
+        <div class="widget-box">
+            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>{{ form.vars.name }}</h5>
+            </div>
+            <div class="widget-content nopadding">
+                {% for block in form %}
+                    {{ form_row(block) }}
+                    {{- form_errors(form) -}}
+                {% endfor %}
+            </div>
+        </div>
+{% endblock %}

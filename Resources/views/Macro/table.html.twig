@@ -1,0 +1,35 @@
+{% macro headers(grid, definition, requestAttributes) %}
+    {% import 'ViwebSystemBundle:Macro:sorting.html.twig' as sorting %}
+
+    {% for field in definition.fields %}
+            {% if field.isSortable %}
+                {{ sorting.tableHeader(grid, field, requestAttributes) }}
+            {% else %}
+                <th>{{ field.label|trans }}</th>
+            {% endif %}
+    {% endfor %}
+    {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+        <th>{{ 'sylius.ui.actions'|trans }}</th>
+    {% endif %}
+{% endmacro %}
+
+{% macro row(grid, definition, row) %}
+    <tr class="item">
+    {% for field in definition.fields %}
+        <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
+    {% endfor %}
+    {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+        <td>
+                {% for action in definition.getActions('item') %}
+                        {{ sylius_grid_render_action(grid, action, row) }}
+                {% endfor %}
+            {% if definition.actionGroups.subitem is defined and definition.getActions('subitem')|length > 0 %}
+            <div class="ui divider"></div>
+                    {% for action in definition.getActions('subitem') %}
+                            {{ sylius_grid_render_action(grid, action, row) }}
+                    {% endfor %}
+            {% endif %}
+        </td>
+    {% endif %}
+    </tr>
+{% endmacro %}

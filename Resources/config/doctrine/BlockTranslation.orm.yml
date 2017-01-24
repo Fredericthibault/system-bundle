@@ -1,0 +1,14 @@
+Viweb\SystemBundle\Entity\BlockTranslation:
+    type: entity
+    table: null
+    repositoryClass: Viweb\SystemBundle\Repository\BlockTranslationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        body:
+            type: text
+    lifecycleCallbacks: {  }

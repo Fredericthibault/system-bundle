@@ -1,0 +1,20 @@
+sylius_resource:
+    resources:
+      viweb.section:
+        classes:
+          model: Viweb\SystemBundle\Entity\Section
+          repository: Viweb\SystemBundle\Repository\SectionRepository
+          form: Viweb\SystemBundle\Form\Type\SectionType
+        translation:
+          classes:
+            model: Viweb\SystemBundle\Entity\SectionTranslation
+            form: Viweb\SystemBundle\Form\Type\SectionTranslationType
+      viweb.block:
+        classes:
+          model: Viweb\SystemBundle\Entity\Block
+          repository: Viweb\SystemBundle\Repository\BlockRepository
+          form: Viweb\SystemBundle\Form\Type\BlockType
+        translation:
+          classes:
+            model: Viweb\SystemBundle\Entity\BlockTranslation
+            form: Viweb\SystemBundle\Form\Type\BlockTranslationType
