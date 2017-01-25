@@ -3,7 +3,7 @@
     <title>{{ section.title }}</title>
 </head>
 <body>
-    {% render(controller('ViwebSystemBundle:FrontendUtils:buildMenu')) %}
+    {{ render(controller('ViwebSystemBundle:FrontendUtils:buildMenu')) }}
     {% for b in section.blocks %}
         {{ b.body|raw }}
     {% endfor %}
