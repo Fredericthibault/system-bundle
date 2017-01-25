@@ -44,6 +44,6 @@ class SectionRepository extends EntityRepository
 //            ->andWhere('st.locale = :locale')
 //            ->setParameters(['locale' => $locale, 'slug' => $slug])
         ;
-        return $qb->getQuery()->getResults();
+        return $qb->getQuery()->getResult();
     }
 }
