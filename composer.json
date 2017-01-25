@@ -22,5 +22,8 @@
         "knplabs/knp-menu-bundle": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "viweb/seo-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-4": { "Viweb\\SystemBundle\\": "" }
     }
 }
