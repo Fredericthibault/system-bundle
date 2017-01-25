@@ -31,4 +31,19 @@ class SectionRepository extends EntityRepository
 
         }
     }
+
+    public function findForMenuBuilder()
+    {
+        $qb = $this->createQueryBuilder('s');
+        $qb->select('s', 'st')
+            ->innerJoin('s.translations', 'st')
+//                ->leftJoin('s.blocks', 'b')
+//                ->leftJoin('b.translations', 'bt')
+//            ->andWhere('st.slug = :slug')
+//                ->andWhere('bt.locale = :locale')
+//            ->andWhere('st.locale = :locale')
+//            ->setParameters(['locale' => $locale, 'slug' => $slug])
+        ;
+        return $qb->getQuery()->getResults();
+    }
 }

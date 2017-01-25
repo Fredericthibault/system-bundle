@@ -10,6 +10,7 @@
         }
     ],
     "repositories": [
+        { "type": "vcs", "url": "https://github.com/viweb/KeyValueFormBundle.git" },
         { "type": "vcs", "url": "git@bitbucket.org:vi_web/seo-bundle.git" }
     ],
     "minimum-stability": "dev",

@@ -1,0 +1,7 @@
+<ul>
+    {% for s in sections %}
+        <li>
+            <a href="{{ path('viweb_system_catchall', {'req': s.slug}) }}">{{ s.title }}</a>
+        </li>
+    {% endfor %}
+</ul>
