@@ -21,6 +21,6 @@
         "sylius/resource-bundle": "^1.0@beta",
         "knplabs/knp-menu-bundle": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "viweb/seo-bundle": "^0.1.2"
+        "viweb/seo-bundle": "dev-master"
     }
 }
