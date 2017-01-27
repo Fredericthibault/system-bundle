@@ -1,8 +1,5 @@
-<html>
-<head>
-    <title>{{ section.title }}</title>
-</head>
-<body>
+{% extends 'layout.html.twig' %}
+{% block content %}
     <h2>Secondary Menu</h2>
     {{ knp_menu_render('secondary') }}
     {% for b in section.blocks %}
@@ -15,5 +12,5 @@
     </form>
     <h2> main menu</h2>
     {{ knp_menu_render('main') }}
-</body>
-</html>
+{% endblock %}
+
