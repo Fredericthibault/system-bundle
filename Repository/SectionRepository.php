@@ -46,4 +46,16 @@ class SectionRepository extends EntityRepository
         ;
         return $qb->getQuery()->getResult();
     }
+
+    public function findSlug($tag)
+    {
+        return $this->createQueryBuilder('s')
+            ->select('st.slug')
+            ->innerJoin('s.translations', 'st')
+            ->andWhere('s.name = :tag')
+            ->andWhere('st.locale = :locale')
+            ->setParameters(['tag' => $tag, 'locale' => 'en'])
+            ->getQuery()->getSingleScalarResult();
+    }
+
 }

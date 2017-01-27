@@ -13,3 +13,11 @@ services:
         class: Viweb\SystemBundle\EventListener\ConfigureAdminMenuListener
         tags:
           - { name: kernel.event_listener, event: viweb_system.menu_admin_configure, method: onMenuConfigure }
+
+    viweb_system.frontend_menu_provider:
+        class: Viweb\SystemBundle\Provider\FrontendMenuProvider
+        arguments:
+            - "@knp_menu.factory"
+            - "@service_container"
+        tags:
+            - { name: knp_menu.provider }
