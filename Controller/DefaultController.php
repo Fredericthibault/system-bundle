@@ -13,7 +13,7 @@ class DefaultController extends Controller
         if(strlen($req) == 0){
             $section = $repo->find(1);
         } else {
-            $section = $repo->findOneByFullSlug($req, 'en');
+            $section = $repo->findOneByFullSlug($req, $request->getLocale());
         }
 
         if(!$section){

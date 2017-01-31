@@ -12,7 +12,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class SectionRepository extends EntityRepository
 {
-    public function findOneByFullSlug($slug, $locale)
+    public function findOneByFullSlug($slug, $locale ='fr')
     {
         try {
             $qb = $this->createQueryBuilder('s');
@@ -32,7 +32,7 @@ class SectionRepository extends EntityRepository
         }
     }
 
-    public function findForMenuBuilder()
+    public function findForMenuBuilder($locale = 'fr')
     {
         $qb = $this->createQueryBuilder('s');
         $qb->select('s', 'st')
@@ -41,20 +41,20 @@ class SectionRepository extends EntityRepository
 //                ->leftJoin('b.translations', 'bt')
 //            ->andWhere('st.slug = :slug')
 //                ->andWhere('bt.locale = :locale')
-//            ->andWhere('st.locale = :locale')
-//            ->setParameters(['locale' => $locale, 'slug' => $slug])
+            ->andWhere('st.locale = :locale')
+            ->setParameters(['locale' => $locale, 'slug' => $slug])
         ;
         return $qb->getQuery()->getResult();
     }
 
-    public function findSlug($tag)
+    public function findSlug($tag, $locale = 'fr')
     {
         return $this->createQueryBuilder('s')
             ->select('st.slug')
             ->innerJoin('s.translations', 'st')
             ->andWhere('s.name = :tag')
             ->andWhere('st.locale = :locale')
-            ->setParameters(['tag' => $tag, 'locale' => 'en'])
+            ->setParameters(['tag' => $tag, 'locale' => $locale])
             ->getQuery()->getSingleScalarResult();
     }
 

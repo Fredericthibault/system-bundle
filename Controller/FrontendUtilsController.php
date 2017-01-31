@@ -21,7 +21,7 @@ class FrontendUtilsController extends Controller
          * @var SectionRepository $repo
          */
         $repo = $this->get('viweb.repository.section');
-        $sections = $repo->findForMenuBuilder();
+        $sections = $repo->findForMenuBuilder($request->getLocale());
         $url = $request->getUri();
         return $this->render('ViwebSystemBundle:Frontend:_menu.html.twig', [
            'sections' => $sections

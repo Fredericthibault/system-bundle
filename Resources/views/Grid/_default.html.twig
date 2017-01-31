@@ -28,7 +28,7 @@
 {% endif %}
 
 
-{#{{ pagination.simple(data) }}#}
+{{ pagination.simple(data) }}
 {% if data|length > 0 %}
     <table class="table table-bordered table-striped">
         <thead>
@@ -45,5 +45,5 @@
 {% else %}
     {{ messages.info('sylius.ui.no_results_to_display') }}
 {% endif %}
-{#{{ pagination.simple(data) }}#}
+{{ pagination.simple(data) }}
 

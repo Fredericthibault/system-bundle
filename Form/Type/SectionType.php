@@ -38,8 +38,9 @@ class SectionType extends AbstractResourceType
                 "multiple" => false,
                 'required' => false
             ])
-           ->add('blocks', CollectionType::class, [
-                'entry_type' => BlockType::class
+           ->add('blocks', BlockListType::class, [
+                'entry_type' => BlockType::class,
+                'entry_options' => ['label' => 'Name']
             ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => SectionTranslationType::class

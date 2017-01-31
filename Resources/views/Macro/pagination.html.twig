@@ -2,6 +2,6 @@
     {% import _self as pagination %}
 
     {% if paginator.haveToPaginate() %}
-        {{ pagerfanta(paginator, 'semantic_ui_translated', options|default({})) }}
+        {{ pagerfanta(paginator, null, options|default({})) }}
     {% endif %}
 {% endmacro %}
