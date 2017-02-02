@@ -14,6 +14,8 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\Provider\MenuProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
+use Viweb\SystemBundle\Event\ConfigureFrontendMenuEvent;
 
 class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInterface
 {
@@ -23,10 +25,16 @@ class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInter
 
     protected $config;
 
+    /**
+     * @var ContainerAwareEventDispatcher
+     */
+    protected $dispatcher;
+
     public function __construct(FactoryInterface $factory = null, $container = null)
     {
         $this->container = $container;
         $this->factory = $factory;
+        $this->dispatcher = $container->get('event_dispatcher');
     }
 
     public function get($name, array $options = [])
@@ -73,6 +81,7 @@ class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInter
                     }
 
                     if($config['bundles']) {
+                        $this->dispatcher->dispatch(ConfigureFrontendMenuEvent::CONFIGURE, new ConfigureFrontendMenuEvent($this->factory, $this->container->get('doctrine.orm.entity_manager')));
                         foreach ($config['bundles'] as $section => $sectionData) {
                             $r[$section] = [
                                 'route' => 'viweb_system_catchall',
