@@ -83,7 +83,7 @@ class BlockType
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $block;
+    private $blocks;
 
     /**
      * Constructor
@@ -122,7 +122,7 @@ class BlockType
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBlock()
+    public function getBlocks()
     {
         return $this->block;
     }
