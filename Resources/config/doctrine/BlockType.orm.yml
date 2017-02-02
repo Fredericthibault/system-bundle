@@ -17,7 +17,7 @@ Viweb\SystemBundle\Entity\BlockType:
             length: 255
             nullable: true
     oneToMany:
-        block:
+        blocks:
             targetEntity: Viweb\SystemBundle\Entity\Block
             mappedBy: type
     lifecycleCallbacks: {  }
