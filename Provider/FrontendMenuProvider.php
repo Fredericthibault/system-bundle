@@ -81,8 +81,9 @@ class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInter
                     }
 
                     if($config['bundles']) {
-                        $this->dispatcher->dispatch(ConfigureFrontendMenuEvent::CONFIGURE, new ConfigureFrontendMenuEvent($this->factory, $this->container->get('doctrine.orm.entity_manager')));
+                        //$this->dispatcher->dispatch(ConfigureFrontendMenuEvent::CONFIGURE, new ConfigureFrontendMenuEvent($this->factory, $this->container->get('doctrine.orm.entity_manager')));
                         foreach ($config['bundles'] as $section => $sectionData) {
+
                             $r[$section] = [
                                 'route' => 'viweb_system_catchall',
                                 'route_params' => $sectionData['name'],
