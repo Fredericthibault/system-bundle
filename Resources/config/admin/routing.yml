@@ -23,4 +23,11 @@ viweb_admin_section_update:
             section: admin
             template: ViwebSystemBundle:Crud:update.html.twig
 
+viweb_admin_home:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /admin/sections/
+        permanent: true
+
 
