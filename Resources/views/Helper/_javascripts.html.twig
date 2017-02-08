@@ -5,16 +5,26 @@
 <script src="{{ asset('bundles/viwebsystem/admin/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('bundles/viwebsystem/admin/js/bootstrap-colorpicker.js') }}"></script>
 <script src="{{ asset('bundles/viwebsystem/admin/js/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('bundles/viwebsystem/admin/js/jquery.toggle.buttons.js') }}"></script>
 <script src="{{ asset('bundles/viwebsystem/admin/js/masked.js') }}"></script>
 <script src="{{ asset('bundles/viwebsystem/admin/js/jquery.uniform.js') }}"></script>
 <script src="{{ asset('bundles/viwebsystem/admin/js/select2.min.js') }}"></script>
 <script src="{{ asset('bundles/viwebsystem/admin/js/matrix.js') }}"></script>
-<script src="{{ asset('bundles/viwebsystem/admin/js/matrix.form_common.js') }}"></script>
-<script src="{{ asset('bundles/viwebsystem/admin/js/wysihtml5-0.3.0.js') }}"></script>
 <script src="{{ asset('bundles/viwebsystem/admin/js/jquery.peity.min.js') }}"></script>
-<script src="{{ asset('bundles/viwebsystem/admin/js/bootstrap-wysihtml5.js') }}"></script>
-<script src="/js/trumbowyg.min.js"></script>
+<script src="{{ asset('bundles/viwebsystem/admin/js/trumbowyg.min.js') }}"></script>
 <script>
-    $('textarea').trumbowyg();
+    $(function() {
+        $('[data-prototype]').each(function(i){
+            that = this;
+            $(this).prepend("<a class='btn btn-info' href='#' id='add_button_" + i +"'>Ajouter</a>");
+            $(this).on('click', '#add_button_' + i, function(e){
+                e.preventDefault();
+                cnt = $(that).find('.control-group').length;
+                toAdd = $(that).attr('data-prototype').replace('__name__label__', 'nouvel element').replace(/__name__/g, cnt);
+                $(that).append(toAdd);
+            })
+        });
+
+        $('textarea').trumbowyg();
+    });
+
 </script>
