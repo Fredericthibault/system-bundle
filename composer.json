@@ -19,7 +19,7 @@
         "symfony/framework-bundle": "^3.2",
         "symfony/templating": "^3.2",
         "sylius/grid-bundle": "1.0.0-beta.1",
-        "sylius/resource-bundle": "1.0.0@beta",
+        "sylius/resource-bundle": "1.0.0-beta.1",
         "knplabs/knp-menu-bundle": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "viweb/seo-bundle": "dev-master"
