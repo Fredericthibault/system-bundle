@@ -25,7 +25,32 @@
         });
 
         $('textarea').trumbowyg({
-            semantic: false
+            semantic: false,
+            removeformatPasted: true,
+            btns: [
+                ['viewHTML'],
+                ['custom_formatting'],
+                'btnGrp-semantic',
+                ['superscript', 'subscript'],
+                ['link'],
+                ['insertImage'],
+                'btnGrp-justify',
+                'btnGrp-lists',
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ],
+            btnsDef: {
+                // Customizables dropdowns
+                custom_formatting: {
+                    dropdown: ['p', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5'],
+                    ico: 'p'
+                },
+                h5: {
+                    fn: 'formatBlock',
+                    title: 'Header 5'
+                }
+            }
         });
     });
 
