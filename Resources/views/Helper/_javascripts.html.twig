@@ -24,6 +24,14 @@
             })
         });
 
+        $(':file').each(function(){
+            $(this).after('<a class="delete" href="#">Suprimer l\'image</a>');
+        });
+        $(this).on('click', '.delete', function(e){
+            e.preventDefault();
+            $(this).parent('.controls').detach();
+        });
+
         $('textarea').trumbowyg({
             semantic: false,
             removeformatPasted: true,
