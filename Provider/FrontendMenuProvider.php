@@ -46,6 +46,7 @@ class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInter
             $menu = $this->factory->createItem($name);
             foreach ($builder as $i => $v){
                     $name = $translator->trans("menu.compound." . $i);
+                    $req = $translator->trans("menu.route." . $i);
                     strpos($name, "menu.compound.") === false ?: $name = $i;
                     $menu->addChild($name, ['route' => $v['route'], 'routeParameters' => ['req' => $v['route_params']]]);
             }
