@@ -15,6 +15,7 @@ use Knp\Menu\Provider\MenuProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Viweb\SystemBundle\Event\ConfigureFrontendMenuEvent;
 
 class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInterface
@@ -25,13 +26,16 @@ class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInter
 
     protected $config;
 
+    protected $requestStack;
+
     /**
      * @var ContainerAwareEventDispatcher
      */
     protected $dispatcher;
 
-    public function __construct(FactoryInterface $factory = null, $container = null)
+    public function __construct(FactoryInterface $factory = null, $container = null, RequestStack $requestStack)
     {
+        $this->requestStack = $requestStack;
         $this->container = $container;
         $this->factory = $factory;
         $this->dispatcher = $container->get('event_dispatcher');
@@ -68,6 +72,7 @@ class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInter
             return $this->config;
         }
         $c = $this->container->getParameter('viweb_system.menus');
+        $locale = $this->requestStack->getMasterRequest()->getLocale();
         $repo = $this->container->get('viweb.repository.section');
         $w = [];
         foreach ($c as $name => $config)
@@ -78,7 +83,7 @@ class FrontendMenuProvider implements MenuProviderInterface, ContainerAwareInter
                     foreach ($config['sections'] as $section => $sectionData) {
                         $r[$section] = [
                             'route' => 'viweb_system_catchall',
-                            'route_params' => $repo->findSlug($sectionData['name']) ?? '',
+                            'route_params' => $repo->findSlug($sectionData['name'], $locale) ?? '',
                             'order' => $sectionData['priority']
                         ];
                     }

@@ -19,5 +19,6 @@ services:
         arguments:
             - "@knp_menu.factory"
             - "@service_container"
+            - "@request_stack"
         tags:
             - { name: knp_menu.provider }
